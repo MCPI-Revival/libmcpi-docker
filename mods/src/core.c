@@ -6,7 +6,7 @@
 
 #include <libcore/libcore.h>
 
-#define PATCH_PRINTF(file, line, start, str) if (file != NULL) fprintf(stderr, "[%s:%i] Patching (0x%04x) - "str": 0x%02x 0x%02x 0x%02x 0x%02x\n", file, line, (uint32_t) start, data[0], data[1], data[2], data[3]);
+#define PATCH_PRINTF(file, line, start, str)
 
 #define ORIGINAL_SIZE 8
 
@@ -50,7 +50,7 @@ void revert_overwrite(void *start, void *original) {
     free(temp);
 }
 
-void _patch(const char *file, int line, void *start, unsigned char patch[]) {
+void _patch(__attribute__((unused)) const char *file, __attribute__((unused)) int line, void *start, unsigned char patch[]) {
     size_t page_size = sysconf(_SC_PAGESIZE);
     uintptr_t end = ((uintptr_t) start) + 4;
     uintptr_t page_start = ((uintptr_t) start) & -page_size;

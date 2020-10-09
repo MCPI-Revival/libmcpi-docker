@@ -349,7 +349,6 @@ HOOK(SDL_Quit, void, ()) {
 HOOK(SDL_WM_GrabInput, SDL_GrabMode, (SDL_GrabMode mode)) {
     if (mode != SDL_GRAB_QUERY && mode != SDL_WM_GrabInput(SDL_GRAB_QUERY)) {
         glfwSetInputMode(glfw_window, GLFW_CURSOR, mode == SDL_GRAB_OFF ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED);
-        glfwSetInputMode(glfw_window, GLFW_RAW_MOUSE_MOTION, mode == SDL_GRAB_OFF ? GLFW_FALSE : GLFW_TRUE);
 
         // GLFW Cursor Hiding is Broken
         if (window_loaded) {
@@ -424,12 +423,4 @@ HOOK(eglDestroyContext, EGLBoolean, (__attribute__((unused)) EGLDisplay display,
 }
 HOOK(eglTerminate, EGLBoolean, (__attribute__((unused)) EGLDisplay display)) {
     return EGL_TRUE;
-}
-
-#include <stdlib.h>
-
-// Use VirGL
-__attribute__((constructor)) static void init() {
-    setenv("LIBGL_ALWAYS_SOFTWARE", "1", 1); 
-    setenv("GALLIUM_DRIVER", "virpipe", 1);
 }

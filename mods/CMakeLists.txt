@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1.0)
 
 project(mods)
 
-add_compile_options(-Wall -Wextra -Werror)
+add_compile_options(-Wall -Wextra -Werror -g)
 
 add_subdirectory(../core core)
 
@@ -14,7 +14,7 @@ target_link_libraries(core dl)
 add_library(extra SHARED src/extra.c src/extra.cpp)
 target_link_libraries(extra core dl)
 
-find_package(glfw3 3.3 REQUIRED)
+find_package(glfw3 3 REQUIRED)
 
 add_library(compat SHARED src/compat.c)
 target_link_libraries(compat core extra SDL EGL GLESv1_CM GLESv2 X11 dl freeimage glfw Xfixes)

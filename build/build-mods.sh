@@ -4,7 +4,7 @@ set -e
 
 cd mods
 
-mkdir build
+mkdir -p build
 cd build
 
 cmake -DCMAKE_TOOLCHAIN_FILE=../../cmake/toolchain.cmake ..
@@ -12,7 +12,7 @@ make -j$(nproc)
 
 cd ../../
 
-mkdir minecraft-pi/mods
+mkdir -p minecraft-pi/mods
 cp mods/build/lib*.so minecraft-pi/mods
 
 cp mods/build/core/lib*.so minecraft-pi
